@@ -31,8 +31,9 @@ akka {
     }
 }
 ");
+            var setup = BootstrapSetup.Create().WithConfig(config);
 
-            using (var system = ActorSystem.Create("MyServer", config))
+            using (var system = ActorSystem.Create("MyServer", setup))
             {
                 system.ActorOf(Props.Create(() => new ChatServerActor()), "ChatServer");
 

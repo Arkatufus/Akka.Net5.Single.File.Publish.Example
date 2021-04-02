@@ -31,7 +31,9 @@ akka {
 }
 ");
 
-            using (var system = ActorSystem.Create("MyClient", config))
+            var setup = BootstrapSetup.Create().WithConfig(config);
+
+            using (var system = ActorSystem.Create("MyClient", setup))
             {
                 var chatClient = system.ActorOf(Props.Create<ChatClientActor>());
                 chatClient.Tell(new ConnectRequest()
